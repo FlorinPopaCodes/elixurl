@@ -1,6 +1,8 @@
 defmodule Elixurl.UrlView do
   use Elixurl.Web, :view
 
+  alias Elixurl.Hashids
+
   def render("index.json", %{urls: urls}) do
     %{data: render_many(urls, Elixurl.UrlView, "url.json")}
   end
@@ -10,7 +12,6 @@ defmodule Elixurl.UrlView do
   end
 
   def render("url.json", %{url: url}) do
-    %{id: url.id,
-      path: url.path}
+    %{Hashids.encode(url.id) => url.path}
   end
 end

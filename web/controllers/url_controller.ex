@@ -2,6 +2,7 @@ defmodule Elixurl.UrlController do
   use Elixurl.Web, :controller
 
   alias Elixurl.Url
+  alias Elixurl.Hashids
 
   def index(conn, _params) do
     urls = Repo.all(Url)
@@ -25,8 +26,8 @@ defmodule Elixurl.UrlController do
   end
 
   def show(conn, %{"id" => id}) do
-    url = Repo.get!(Url, id)
-    render(conn, "show.json", url: url)
+    url = Repo.get!(Url, Elixurl.Hashids.decode(id))
+    redirect conn, external: url.path
   end
 
   def update(conn, %{"id" => id, "url" => url_params}) do

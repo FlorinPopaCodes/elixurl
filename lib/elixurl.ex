@@ -14,7 +14,7 @@ defmodule Elixurl do
       supervisor(Elixurl.Endpoint, []),
       # Start your own worker by calling: Elixurl.Worker.start_link(arg1, arg2, arg3)
       # worker(Elixurl.Worker, [arg1, arg2, arg3]),
-      worker(Elixurl.Hashids, [[name: :hashids]])
+      worker(Elixurl.Hashids, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
